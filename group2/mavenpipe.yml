@@ -35,5 +35,6 @@ jobs:
       - task: mvn-package
         file: git/group2/package.yml
       # Take the image built in the previous task, and push it to our Docker registry Resource
-      - put: image
-        params: {image: image/hello-java.tar}
+      - put: hello-world-docker-image
+        params:
+          build: tutorial/tutorials/miscellaneous/docker-images/docker
