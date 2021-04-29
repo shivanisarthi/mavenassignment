@@ -17,7 +17,7 @@ image_resource:
 # It also allows us to execute this step independently, for a specific Git commit.
 # However, the parent pipeline only runs this task when the previous 'unit' job has passed.
 inputs:
-  - name: git
+  - name: git1
 
 outputs:
   - name: image # Concourse creates this directory for us. This will hold the OCI image .tar
@@ -30,7 +30,7 @@ run:
   path: "mvn"
   args:
     - -f
-    - git/group2/pom.xml
+    - git1/group2/pom.xml
     - test
     - package
      
