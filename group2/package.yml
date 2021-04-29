@@ -30,7 +30,7 @@ run:
   path: "mvn"
   args:
     - -f
-    - git/pom.xml
+    - git/group2/pom.xml
     - test
     - package
      
