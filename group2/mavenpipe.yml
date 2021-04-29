@@ -6,21 +6,20 @@ resources:
       uri: https://github.com/shivanisarthi/mavenassignment
       branch: main
   - name: image
-    type: registry-image
+    type: docker-image
     icon: docker
     source:
-      repository: ((image-name))
-      username: ((registry-username))
-      password: ((registry-password))
-      tag: latest
+      email: ((email-id))
+      username: "shivanisarthi123"
+      password: ((pass-key)) 
+      repository: shivanisarthi123/concourse_ci_test
 
 jobs:
 
   # This test job will fetch the source code from GitHub, and execute the test task.
-  - name: unit
+  - name: compile
     plan:
       - get: git
-        version: latest # Just process the latest Git commit, not every commit (this is the default setting)
         trigger: true # Trigger this job whenever Concourse detects a new Resource version (i.e. a new Git commit)
       - task: mvn-compile
         file: git/group2/compile.yml
@@ -31,10 +30,10 @@ jobs:
     plan:
       - get: git # Concourse is stateless and needs to be given an external input to this Job.
         passed:
-          - unit # The 'unit' job must have passed for this job to execute
+          - compile # The 'unit' job must have passed for this job to execute
         trigger: true
       - task: mvn-package
-        file: git/ci/concourse/tasks/package.yml
+        file: git/group2/package.yml
       # Take the image built in the previous task, and push it to our Docker registry Resource
       - put: image
         params: {image: image/hello-java.tar}
