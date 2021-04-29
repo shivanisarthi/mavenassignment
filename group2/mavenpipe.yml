@@ -9,9 +9,9 @@ resources:
     type: docker-image
     icon: docker
     source:
-      email: ((email-id))
+      email: "shivani.sarthi@knoldus.com"
       username: "shivanisarthi123"
-      password: ((pass-key)) 
+      password: "Shivani@123"
       repository: shivanisarthi123/concourse_ci_test
 
 jobs:
